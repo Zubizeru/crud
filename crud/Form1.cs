@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
 
 namespace crud
 {
     public partial class FrmCadastroDeCliente : Form
     {
+        //Conexao com o banco de dados mySql
+        MySqlConnection Conexao;
+        string data_source = "datasource=localhost;username=root;password =; database=bd_cadastro";
+
         public FrmCadastroDeCliente()
         {
             InitializeComponent();
@@ -63,11 +68,46 @@ namespace crud
                 }
 
                 MessageBox.Show("Cadastro realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                Conexao = new MySqlConnection(data_source);
+                Conexao.Open();
+                // MessageBox.Show("Conexão Aberta");
+
+                MySqlCommand cmd =new MySqlCommand
+                {
+                    Connection = Conexao
+                };
+
+                cmd.Prepare();
+
+                cmd.CommandText = "INSERT INTO dadosdecliente(nomecompleto, nomesocial, email, cpf)" +
+                    "Values (@nomecompleto, @nomesocial, @email, @cpf)";
+
+                cmd.Parameters.AddWithValue(@"nomecompleto", txtNomeCompleto.Text.Trim());
+                cmd.Parameters.AddWithValue(@"nomesocial", txtNomeSocial.Text.Trim());
+                cmd.Parameters.AddWithValue(@"email", email);
+                cmd.Parameters.AddWithValue(@"cpf",cpf);
+
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Contato inserido com sucesso: ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Erro " + ex.Number + " ocorreu: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if(Conexao != null && Conexao.State == ConnectionState.Open)
+                {
+                Conexao.Close();
+                    // MessageBox.Show("Conexão Fechada");
+                }
             }
         }
     }
