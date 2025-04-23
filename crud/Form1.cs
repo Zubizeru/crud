@@ -260,5 +260,62 @@ namespace crud
             // Muda para a aba de dados do cliente
             TabControl.SelectedIndex = 0;
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            excluir_cliente();
+        }
+
+        private void btnExcluirCliente_Click(object sender, EventArgs e)
+        {
+            excluir_cliente();
+        }
+
+        private void excluir_cliente()
+        {
+            try
+            {
+                DialogResult opcaoDigitada = MessageBox.Show($"Tem Certeza que deseja excluir o registro de código {codigo_cliente}?", "Tem Certeza", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (opcaoDigitada == DialogResult.Yes)
+                {
+                    Conexao = new MySqlConnection(data_source);
+                    Conexao.Open();
+
+                    MySqlCommand cmd = new MySqlCommand();
+
+                    cmd.Connection = Conexao;
+
+                    cmd.Prepare();
+
+                    cmd.CommandText = "DELETE FROM dadosdecliente WHERE codigo = @codigo";
+
+                    cmd.Parameters.AddWithValue("@codigo", codigo_cliente);
+
+                    cmd.ExecuteNonQuery();
+
+                    //Excluir dados do banco
+                    MessageBox.Show("Os dados do cliente foram EXCLUÍDOS", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    carregarClientes();
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Erro " + ex.Number + " ocorreu: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (Conexao != null && Conexao.State == ConnectionState.Open)
+                {
+                    Conexao.Close();
+                }
+            }
+        }
     }
 }

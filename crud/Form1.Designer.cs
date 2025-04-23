@@ -29,11 +29,11 @@ namespace crud
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelTopo = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tbCadastro = new System.Windows.Forms.TabPage();
-            this.btnSalvar = new System.Windows.Forms.Button();
             this.txtCPF = new System.Windows.Forms.MaskedTextBox();
             this.lblCPF = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -43,15 +43,20 @@ namespace crud
             this.txtNomeCompleto = new System.Windows.Forms.TextBox();
             this.lblNomeCompleto = new System.Windows.Forms.Label();
             this.tbConsulta = new System.Windows.Forms.TabPage();
+            this.btnReset = new System.Windows.Forms.Button();
             this.lstCliente = new System.Windows.Forms.ListView();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.btnNovoCliente = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExcluirCliente = new System.Windows.Forms.Button();
             this.panelTopo.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.tbCadastro.SuspendLayout();
             this.tbConsulta.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTopo
@@ -103,19 +108,6 @@ namespace crud
             this.tbCadastro.TabIndex = 0;
             this.tbCadastro.Text = "Dados de clientes";
             this.tbCadastro.UseVisualStyleBackColor = true;
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.ForeColor = System.Drawing.Color.White;
-            this.btnSalvar.Location = new System.Drawing.Point(16, 440);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(127, 42);
-            this.btnSalvar.TabIndex = 9;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = false;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // txtCPF
             // 
@@ -204,8 +196,24 @@ namespace crud
             this.tbConsulta.Text = "Consulta";
             this.tbConsulta.UseVisualStyleBackColor = true;
             // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.White;
+            this.btnReset.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.btnReset.FlatAppearance.BorderSize = 2;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.ForeColor = System.Drawing.Color.Wheat;
+            this.btnReset.Image = global::crud.Properties.Resources.icons8_clear_25;
+            this.btnReset.Location = new System.Drawing.Point(862, 6);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(30, 30);
+            this.btnReset.TabIndex = 3;
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // lstCliente
             // 
+            this.lstCliente.ContextMenuStrip = this.contextMenuStrip1;
             this.lstCliente.HideSelection = false;
             this.lstCliente.Location = new System.Drawing.Point(22, 39);
             this.lstCliente.MultiSelect = false;
@@ -237,41 +245,72 @@ namespace crud
             this.txtBuscar.Size = new System.Drawing.Size(695, 26);
             this.txtBuscar.TabIndex = 0;
             // 
+            // btnSalvar
+            // 
+            this.btnSalvar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.Color.White;
+            this.btnSalvar.Location = new System.Drawing.Point(16, 440);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(153, 42);
+            this.btnSalvar.TabIndex = 9;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
             // btnNovoCliente
             // 
-            this.btnNovoCliente.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnNovoCliente.BackColor = System.Drawing.Color.White;
+            this.btnNovoCliente.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.btnNovoCliente.FlatAppearance.BorderSize = 2;
+            this.btnNovoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNovoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovoCliente.ForeColor = System.Drawing.Color.White;
+            this.btnNovoCliente.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnNovoCliente.Image = global::crud.Properties.Resources.cliente;
-            this.btnNovoCliente.Location = new System.Drawing.Point(149, 440);
+            this.btnNovoCliente.Location = new System.Drawing.Point(175, 440);
             this.btnNovoCliente.Name = "btnNovoCliente";
-            this.btnNovoCliente.Size = new System.Drawing.Size(127, 42);
+            this.btnNovoCliente.Size = new System.Drawing.Size(153, 42);
             this.btnNovoCliente.TabIndex = 10;
             this.btnNovoCliente.Text = "Novo Cliente";
             this.btnNovoCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnNovoCliente.UseVisualStyleBackColor = false;
             this.btnNovoCliente.Click += new System.EventHandler(this.btnNovoCliente_Click);
             // 
-            // btnReset
+            // contextMenuStrip1
             // 
-            this.btnReset.BackColor = System.Drawing.Color.White;
-            this.btnReset.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
-            this.btnReset.FlatAppearance.BorderSize = 2;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.ForeColor = System.Drawing.Color.Wheat;
-            this.btnReset.Image = global::crud.Properties.Resources.icons8_clear_25;
-            this.btnReset.Location = new System.Drawing.Point(862, 6);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(30, 30);
-            this.btnReset.TabIndex = 3;
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem1.Text = "Excluir Cliente";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // btnExcluirCliente
+            // 
+            this.btnExcluirCliente.BackColor = System.Drawing.Color.Maroon;
+            this.btnExcluirCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirCliente.Font = new System.Drawing.Font("Segoe Script", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluirCliente.ForeColor = System.Drawing.Color.White;
+            this.btnExcluirCliente.Location = new System.Drawing.Point(764, 440);
+            this.btnExcluirCliente.Name = "btnExcluirCliente";
+            this.btnExcluirCliente.Size = new System.Drawing.Size(153, 42);
+            this.btnExcluirCliente.TabIndex = 12;
+            this.btnExcluirCliente.Text = "Excluir Cliente";
+            this.btnExcluirCliente.UseVisualStyleBackColor = false;
+            this.btnExcluirCliente.Click += new System.EventHandler(this.btnExcluirCliente_Click);
             // 
             // FrmCadastroDeCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 487);
+            this.Controls.Add(this.btnExcluirCliente);
             this.Controls.Add(this.btnNovoCliente);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.btnSalvar);
@@ -285,6 +324,7 @@ namespace crud
             this.tbCadastro.PerformLayout();
             this.tbConsulta.ResumeLayout(false);
             this.tbConsulta.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -310,6 +350,9 @@ namespace crud
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnNovoCliente;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Button btnExcluirCliente;
     }
 }
 
