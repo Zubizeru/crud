@@ -218,7 +218,10 @@ namespace crud
             txtEmail.Text = "";
             txtCPF.Text = "";
             codigo_cliente = null;
+
+            btnExcluirCliente.Visible = false;
         }
+
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
@@ -248,27 +251,29 @@ namespace crud
             {
                 codigo_cliente = Convert.ToInt32(item.SubItems[0].Text);
 
-                //Exibe uma MessageBox com o código do cliente
                 MessageBox.Show($"Código do Cliente: {codigo_cliente.ToString()}", "Código Selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtNomeCompleto.Text = item.SubItems[1].Text;
                 txtNomeSocial.Text = item.SubItems[2].Text;
                 txtEmail.Text = item.SubItems[3].Text;
                 txtCPF.Text = item.SubItems[4].Text;
+
+                btnExcluirCliente.Visible = true;
             }
 
-            // Muda para a aba de dados do cliente
             TabControl.SelectedIndex = 0;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             excluir_cliente();
+            limparCampos();
         }
 
         private void btnExcluirCliente_Click(object sender, EventArgs e)
         {
             excluir_cliente();
+            limparCampos();
         }
 
         private void excluir_cliente()
